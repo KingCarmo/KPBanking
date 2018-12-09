@@ -1,6 +1,5 @@
 package com.web.kpbanking.services;
 
-import java.util.ArrayList;
 import java.util.List;
 //Important to add your classes into this
 import com.web.kpbanking.GetsSets.Account;
@@ -93,5 +92,11 @@ public class AccountService {
     public boolean deleteAccount(Account delac) {
 
         return data.deleteAccount(delac);
+    }
+
+    //Transfer Funds
+    public boolean transfer(int accFrom, int accTo, int amount) {
+
+        return data.transfer(accFrom, accTo, amount);
     }
 }

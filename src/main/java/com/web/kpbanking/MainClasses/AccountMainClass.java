@@ -5,7 +5,6 @@
  */
 package com.web.kpbanking.MainClasses;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import com.web.kpbanking.GetsSets.Account;
 import com.web.kpbanking.services.AccountService;
 import javax.ws.rs.Consumes;
-import static org.eclipse.persistence.expressions.ExpressionOperator.as;
 
 /**
  *
@@ -29,11 +27,12 @@ public class AccountMainClass {
     //Account service
     AccountService accser = new AccountService();
 
-    //Create Account Example: api/account/create
+    //Create Account 
+    //Example: api/account/create
     @POST
-    @Path("/create")
-    public void createAccount(Account adda) {
-        if (accser.addAccount(adda)) {
+    @Path("/save")
+    public void createAccount(Account addacc) {
+        if (accser.addAccount(addacc)) {
             System.out.println("Success: Account created!");
         } else {
             System.out.println("FAIL: Account not created!");
@@ -51,8 +50,7 @@ public class AccountMainClass {
     }
 
     /**
-     * Gathering Account Bal    *
-     * Example: api/account/balance/201
+     * Gathering Account Bal * Example: api/account/balance/201
      */
     @GET
     @Path("/balance/{accNum}")
@@ -60,6 +58,21 @@ public class AccountMainClass {
         double bal = accser.getAccBal(accNum);
         System.out.println("This account Balance for " + accNum + " is = " + bal);
         return bal;
+    }
+
+    /**
+     * Transfer Funds
+     * api/account/transfer/{accFrom}/{accTo}/{amount}
+     * Example: http://localhost:49000/api/account/transfer/123/124/554.21
+     */
+    @POST
+    @Path("/transfer/{accFrom}/{accTo}/{amount}")
+    public void transfer(@PathParam("accFrom") int accFrom, @PathParam("accTo") int accTo, @PathParam("amount") int amount) {
+        if (accser.transfer(accFrom, accTo, amount)) {
+            System.out.println("Transfered " + amount + " from " + accFrom + " To" + accTo);
+        } else {
+            System.out.println("FAIL: Transfer unsuccessful");
+        }
     }
 
 }

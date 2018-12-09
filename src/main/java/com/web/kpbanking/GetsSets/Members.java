@@ -1,7 +1,6 @@
 package com.web.kpbanking.GetsSets;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
 
 /**
  *

@@ -6,7 +6,6 @@
 package com.web.kpbanking.services;
 
 import com.web.kpbanking.database.Database;
-import com.web.kpbanking.GetsSets.Members;
 import com.web.kpbanking.GetsSets.Transaction;
 import java.util.List;
 import java.util.ArrayList;

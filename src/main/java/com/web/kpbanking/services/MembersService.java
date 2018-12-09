@@ -1,13 +1,12 @@
 package com.web.kpbanking.services;
 
 import com.web.kpbanking.GetsSets.Members;
-import java.util.List;
 import com.web.kpbanking.database.Database;
 
 /**
  *
- * @author Kevin Carmody && Peter Finegan 
- * w/ help of my cousin who helped me write the code for the service part
+ * @author Kevin Carmody && Peter Finegan w/ help of my cousin who helped me
+ * write the code for the service part
  *
  */
 public class MembersService {
@@ -45,6 +44,6 @@ public class MembersService {
         //Delete Members and account with UID
         return data.deleteMember(c);
     }
-    
+
     //Couldn't get code for Updating Members working, only create and delete :( 
 }

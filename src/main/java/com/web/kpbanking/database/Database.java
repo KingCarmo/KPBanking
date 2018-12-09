@@ -15,7 +15,6 @@ import com.web.kpbanking.GetsSets.Members;
 import com.web.kpbanking.GetsSets.Transaction;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Date;
 
 //Reference - Class Mates helped in class with how to do this random picked Database when struggling
 public class Database {
@@ -27,18 +26,18 @@ public class Database {
     public static boolean init = true;
 
     public Database() {
-        if (init) {           
-            
+        if (init) {
+
             //Account DB
-            Account acc1 = new Account(201, 321, "Current", (float) 43000);
-            Account acc2 = new Account(332, 322, "Current", (float) 45000);
-            Account acc3 = new Account(101, 323, "Savings", (float) 155000);
-            Account acc4 = new Account(69, 921, "Saving", (float) 4000);
-            Account acc5 = new Account(12, 521, "Current", (float) 7000);
-            Account acc6 = new Account(19, 221, "Loan", (float) -14897);
-            Account acc7 = new Account(201, 521, "Saving", (float) 7000);
-            Account acc8 = new Account(128, 221, "Loan", (float) -21567);
-            
+            Account acc1 = new Account(201, 321, "Current", (double) 43000);
+            Account acc2 = new Account(332, 322, "Current", (double) 45000);
+            Account acc3 = new Account(101, 323, "Savings", (double) 155000);
+            Account acc4 = new Account(69, 921, "Saving", (double) 4000);
+            Account acc5 = new Account(12, 521, "Current", (double) 7000);
+            Account acc6 = new Account(19, 221, "Loan", (double) -14897);
+            Account acc7 = new Account(201, 521, "Saving", (double) 7000);
+            Account acc8 = new Account(128, 221, "Loan", (double) -21567);
+
             //Printing Acc DB abbove
             accountDB.add(acc1);
             accountDB.add(acc2);
@@ -48,7 +47,7 @@ public class Database {
             accountDB.add(acc6);
             accountDB.add(acc7);
             accountDB.add(acc8);
-            
+
             //Transaction DB
             Transaction tran1 = new Transaction(01, "(2020-Mar-1)", 123, 627, (long) 207.01);
             Transaction tran2 = new Transaction(03, "(2021-Mar-2)", 124, 126, (long) 876.99);
@@ -56,7 +55,7 @@ public class Database {
             Transaction tran4 = new Transaction(04, "(2021-Mar-2)", 183, 125, (long) 34.99);
             Transaction tran5 = new Transaction(04, "(2021-Mar-2)", 126, 124, (long) 100.79);
             Transaction tran6 = new Transaction(05, "(2021-Mar-2)", 627, 123, (long) 101.87);
-            
+
             //Printing Transactions DB above
             transactionDB.add(tran1);
             transactionDB.add(tran2);
@@ -64,17 +63,16 @@ public class Database {
             transactionDB.add(tran4);
             transactionDB.add(tran5);
             transactionDB.add(tran6);
-            
+
             //Members creating and printing - First Name, Last Name, Location, Sort Code, Email, Unique Code
-            Members m1 = new Members("Devin", "Charlie", "San Francisco", "1010","CharlieDevin@Gmail.com", 1);
+            Members m1 = new Members("Devin", "Charlie", "San Francisco", "1010", "CharlieDevin@Gmail.com", 1);
             Members m2 = new Members("Jim", "Hungary", "Beijing", "1910", "HungaryJim@gmail.com", 2);
             Members m3 = new Members("Wayne", "Bruce", "Gotham City", "1347", "BruceWayne@wayneenterprises.com", 3);
-            Members m4 = new Members("Carmody", "John", "Dublin", "7642","JohnCarmody@live.ie",  4);
-            Members m5 = new Members("Finegan", "Peter", "Bettystown", "9807","PeterFinegan@rockets.com", 5);
+            Members m4 = new Members("Carmody", "John", "Dublin", "7642", "JohnCarmody@live.ie", 4);
+            Members m5 = new Members("Finegan", "Peter", "Bettystown", "9807", "PeterFinegan@rockets.com", 5);
             Members m6 = new Members("Curran", "Veronica", "London", "8641", "VCurran@hotmail.com", 6);
-            Members m7 = new Members("Doyle", "Kevin", "Toronto", "2806","KDoyle@live.ie", 7);
-            Members m8 = new Members("Sutherland", "Kiefer", "Afghanistan", "1212","KSnake@MGS.com", 8);
-            
+            Members m7 = new Members("Doyle", "Kevin", "Toronto", "2806", "KDoyle@live.ie", 7);
+            Members m8 = new Members("Sutherland", "Kiefer", "Afghanistan", "1212", "KSnake@MGS.com", 8);
 
             memberDB.add(m1);
             memberDB.add(m2);
@@ -105,10 +103,9 @@ public class Database {
     }
 
     /**
-     * The Following Methods are for:
-     * Adding Accounts, Adding Members, Adding Transactions to DB
-     * Delete Customer from DB and Account from DB
-     * 
+     * The Following Methods are for: Adding Accounts, Adding Members, Adding
+     * Transactions to DB Delete Customer from DB and Account from DB
+     *
      */
     public static boolean addMembers(Members c) {
         System.out.println("Before,Size= " + memberDB.size());
@@ -154,7 +151,6 @@ public class Database {
         return false;
     }
 
-    
     //Update Bank Members details on DB
     public static boolean updateMember(Members t) {
         int index = 0;
@@ -182,7 +178,7 @@ public class Database {
         }
         return false;
     }
-    
+
     //Deleteing Bank Members Accounts on DB
     public static boolean deleteAccount(Account a) {
         int index = 0;
@@ -196,5 +192,57 @@ public class Database {
         return false;
     }
 
+    /**
+     * Lodge
+     */
+    public static boolean lodge(int acc, int amount) {
+        int index = 0;
+        for (Account tempA : accountDB) {
+            if (acc == tempA.getAccNum()) {
+                tempA.setBalance(tempA.getBalance() + amount);
+                accountDB.set(index, tempA);
+
+                Transaction trans = new Transaction();
+                trans.setTransTo(acc);
+                trans.setAmount(amount);
+                //tempT.setMessage("Lodgement");
+
+                addTrans(trans);
+                return true;
+            }
+            index++;
+        }
+        return false;
+    }
+
+    /**
+     * Withdraw
+     */
+    public static boolean withdraw(int accNum, int amount) {
+        int index = 0;
+        for (Account tempA : accountDB) {
+            if (accNum == tempA.getAccNum()) {
+                tempA.setBalance(tempA.getBalance() - amount);
+                accountDB.set(index, tempA);
+
+                Transaction trans = new Transaction();
+                trans.setTransFrom(accNum);
+                trans.setAmount(amount);
+                //tempT.setMessage("Withdraw");
+
+                addTrans(trans);
+                return true;
+            }
+            index++;
+        }
+        return false;
+    }
+
+    //Transfer
+    public static boolean transfer(int accFrom, int accTo, int amount) {
+        withdraw(accFrom, amount);
+        lodge(accTo, amount);
+        return false;
+    }
 
 }

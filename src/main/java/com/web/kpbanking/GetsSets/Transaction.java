@@ -5,7 +5,6 @@
  */
 package com.web.kpbanking.GetsSets;
 
-import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,7 +28,7 @@ public class Transaction {
      * Constructor(s)
      */
     public Transaction() {
-      
+
     }
 
     public Transaction(int transID, String transDate, int transTo, int transFrom, long amount) {
@@ -39,7 +38,8 @@ public class Transaction {
         this.transFrom = transFrom;
         this.amount = amount;
     }
-
+    
+    //Getters and setters for above variables
     public int getTransID() {
         return transID;
     }
@@ -79,10 +79,4 @@ public class Transaction {
     public void setAmount(long amount) {
         this.amount = amount;
     }
-
-    /**
-     * Getters and setters for above variables
-     */
-    
-    
 }
