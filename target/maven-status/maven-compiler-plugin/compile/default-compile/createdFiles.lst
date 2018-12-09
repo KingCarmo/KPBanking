@@ -1,0 +1,10 @@
+com\web\kpbanking\MainClasses\AccountMainClass.class
+com\web\kpbanking\services\MembersService.class
+com\web\kpbanking\services\TransactionService.class
+com\web\kpbanking\MainClasses\TransactionMainClass.class
+com\web\kpbanking\GetsSets\Members.class
+com\web\kpbanking\services\AccountService.class
+com\web\kpbanking\GetsSets\Transaction.class
+com\web\kpbanking\GetsSets\Account.class
+com\web\kpbanking\database\Database.class
+com\web\kpbanking\MainClasses\MembersMainClass.class
